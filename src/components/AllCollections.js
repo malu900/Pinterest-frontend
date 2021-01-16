@@ -43,20 +43,21 @@ export class AllCollections extends Component {
   componentDidUpdate() {}
   render() {
     return (
-      <div>
+      <div className="pinterest-layout-container">
         {this.state.collections.map((item, i) => (
-          <div>
-            <Link
-              key={i}
-              to={`/collections/all/${item.id}`}
-              params={{ id: item.id }}
-              collection={item}
-              collectionname={item.collectionname}
-              {...this.props}
-            >
+          <Link
+            key={i}
+            to={`/collections/all/${item.id}`}
+            params={{ id: item.id }}
+            collection={item}
+            collectionname={item.collectionname}
+            {...this.props}
+          >
+            <div className="pinterest-layout-container-item">
+              <img src={item.collectionImage.photoBase64} />
               <p key={i}> {item.collectionname}</p>
-            </Link>
-          </div>
+            </div>
+          </Link>
         ))}
       </div>
     );

@@ -1,4 +1,5 @@
 import "./App.css";
+import "./App.scss";
 import React, { Component } from "react";
 import { getcurrentuser } from "./common/APIUtils";
 import { ACCESS_TOKEN } from "./common/constants";
@@ -11,7 +12,6 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import NotFound from "./components/NotFound";
 import Profile from "./components/Profile";
-import Collection from "./components/Collection";
 import Collections from "./components/Collections";
 import ShowCollection from "./components/ShowCollection";
 import AllCollections from "./components/AllCollections";
@@ -64,7 +64,7 @@ export class App extends Component {
         />
         <div className="app-content">
           <ToastContainer autoClose={1500} />
-          <Container>
+          <div id="container-layout">
             <Switch>
               <Route
                 exact
@@ -136,7 +136,7 @@ export class App extends Component {
               />
               <Route component={NotFound}></Route>
             </Switch>
-          </Container>
+          </div>
         </div>
       </div>
     );
