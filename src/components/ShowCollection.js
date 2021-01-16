@@ -36,11 +36,9 @@ export class ShowCollection extends Component {
   componentDidUpdate() {}
   render() {
     let collection = this.state.collection;
-    let file = this.state.file;
     return (
       <div>
         <p style={{ margin: "0" }}>{collection.collectionname}</p>
-        <img src={file.photoBase64} />
       </div>
     );
   }

@@ -30,32 +30,13 @@ export class Collection extends Component {
   };
 
   handleSubmit = (event) => {
-    const headers = new Headers({
-      "Content-Type": "application/x-www-form-urlencoded",
-      Accept: "application/json",
-    });
-    if (sessionStorage.getItem(ACCESS_TOKEN)) {
-      headers.append(
-        "Authorization",
-        "Bearer " + sessionStorage.getItem(ACCESS_TOKEN)
-      );
-    }
-    console.log(headers.values);
-
     event.preventDefault();
 
     const formData = new FormData();
     formData.append("file", this.state.file);
     formData.append("collectionName", this.state.collectionName);
 
-    axios({
-      method: "post",
-      headers: {
-        Authorization: "Bearer " + sessionStorage.getItem(ACCESS_TOKEN),
-      },
-      url: "http://localhost:8080/api/collections",
-      data: formData,
-    })
+    createCollection(formData)
       .then(() => {
         this.props.history.push("/collections/all");
       })
@@ -65,16 +46,6 @@ export class Collection extends Component {
     console.log(formData);
   };
 
-  uploadFile = (event) => {
-    event.preventDefault();
-
-    const formData = new FormData();
-    formData.append("file", this.state.file);
-    formData.append("collectionName", this.state.collectionName);
-    for (var pair of formData.entries()) {
-      console.log(pair[0] + ", " + pair[1]);
-    }
-  };
   fileSelectedHandler = (event) => {
     console.log(event.target.files[0]);
     this.setState({
@@ -107,9 +78,9 @@ export class Collection extends Component {
               accept="image/png, image/jpeg"
             />
           </Form.Group>
-          <Button disabled={!this.state.file} onClick={this.uploadFile}>
+          {/* <Button disabled={!this.state.file} onClick={this.uploadFile}>
             Upload
-          </Button>
+          </Button> */}
           <Button variant="primary" type="submit">
             Submit
           </Button>
