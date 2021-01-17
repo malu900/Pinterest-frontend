@@ -16,13 +16,6 @@ export class Collection extends Component {
       currentuser: this.props.currentuser,
     };
   }
-  componentDidMount() {
-    // if (this.state.isauthenticated) {
-    //   console.log("authed");
-    // } else {
-    //   // this.props.history.push("/");
-    // }
-  }
   onChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value,
@@ -73,14 +66,10 @@ export class Collection extends Component {
               type="file"
               name="collectionImage"
               placeholder="collection image"
-              value={this.state.collectionImage}
               onChange={this.fileSelectedHandler}
-              accept="image/png, image/jpeg"
+              accept="image/jpeg"
             />
           </Form.Group>
-          {/* <Button disabled={!this.state.file} onClick={this.uploadFile}>
-            Upload
-          </Button> */}
           <Button variant="primary" type="submit">
             Submit
           </Button>

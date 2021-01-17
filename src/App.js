@@ -1,11 +1,9 @@
 import "./App.css";
 import "./App.scss";
 import React, { Component } from "react";
-import { getcurrentuser } from "./common/APIUtils";
+import { getcurrentuser, getAllImages } from "./common/APIUtils";
 import { ACCESS_TOKEN } from "./common/constants";
 import AppHeader from "./common/AppHeader";
-
-import { Container } from "react-bootstrap";
 import { Switch, Route, withRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Login from "./components/Login";
@@ -15,12 +13,19 @@ import Profile from "./components/Profile";
 import Collections from "./components/Collections";
 import ShowCollection from "./components/ShowCollection";
 import AllCollections from "./components/AllCollections";
+import CreateImage from "./components/CreateImage";
+import Image from "./components/Image";
+import { Link } from "react-router-dom";
+import { ImageComponent } from "./components/ImageComponent";
+import Overview from "./components/Overview";
+
 export class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       currentuser: null,
       isauthenticated: false,
+      images: [],
     };
   }
   loadcurrentuser = () => {
@@ -35,7 +40,17 @@ export class App extends Component {
 
   componentDidMount() {
     this.loadcurrentuser();
+    this.getAllImagesIfSignedIn();
     console.log(this.currentuser, this.isauthenticated);
+  }
+
+  getAllImagesIfSignedIn() {
+    getAllImages().then((response) => {
+      this.setState({
+        images: response,
+      });
+      console.log(response);
+    });
   }
 
   handleLogout = () => {
@@ -92,6 +107,7 @@ export class App extends Component {
                 )}
               ></Route>
               <Route
+                exact
                 path="/collections/all/:id"
                 render={(props) => (
                   <ShowCollection
@@ -101,17 +117,28 @@ export class App extends Component {
                   />
                 )}
               />
-              {/* <Route path="/collections/:id" component={ShowCollection} /> */}
-              {/* <Route
-                path="/collections/all"
+              <Route
+                exact
+                path="/collections/all/:id/images"
                 render={(props) => (
-                  <Collection
+                  <CreateImage
+                    {...props}
                     isauthenticated={this.state.isauthenticated}
                     currentuser={this.state.currentuser}
-                    {...props}
                   />
                 )}
-              /> */}
+              />
+              <Route
+                exact
+                path="/collections/images/:id"
+                render={(props) => (
+                  <ImageComponent
+                    {...props}
+                    isauthenticated={this.state.isauthenticated}
+                    currentuser={this.state.currentuser}
+                  />
+                )}
+              ></Route>
               <Route
                 exact
                 path="/collections"
@@ -128,6 +155,17 @@ export class App extends Component {
                 path="/collections/all"
                 render={(props) => (
                   <AllCollections
+                    {...props}
+                    isauthenticated={this.state.isauthenticated}
+                    currentuser={this.state.currentuser}
+                  />
+                )}
+              />
+              <Route
+                exact
+                path="/images"
+                render={(props) => (
+                  <Overview
                     {...props}
                     isauthenticated={this.state.isauthenticated}
                     currentuser={this.state.currentuser}

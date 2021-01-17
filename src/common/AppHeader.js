@@ -21,6 +21,15 @@ export class AppHeader extends Component {
           <Navbar.Brand key="/">
             <Link to="/"> HOME </Link>
           </Navbar.Brand>
+          <Nav.Item key="overview">
+            <Link to={"/images"}>overview</Link>
+          </Nav.Item>
+          <Nav.Item key="all collection">
+            <Link to={"/collections/"}>Create Collection</Link>
+          </Nav.Item>
+          <Nav.Item key="new collection">
+            <Link to={"/collections/all"}>all collections</Link>
+          </Nav.Item>
           <div className="username-info">
             signed in as: {this.props.currentuser.username}
           </div>
@@ -29,12 +38,6 @@ export class AppHeader extends Component {
               <Link to={`/users/${this.props.currentuser.username}`}>
                 Profile
               </Link>
-            </Nav.Item>
-            <Nav.Item key="all collection">
-              <Link to={"/collections/"}>Create Collection</Link>
-            </Nav.Item>
-            <Nav.Item key="new collection">
-              <Link to={"/collections/all"}>all collections</Link>
             </Nav.Item>
 
             <NavDropdown.Divider />

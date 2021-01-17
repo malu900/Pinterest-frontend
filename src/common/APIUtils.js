@@ -81,19 +81,42 @@ export function getUserCollectionByCollectionId(collectionId) {
   });
 }
 
+export function getAllImagesFromUserInCollection(collectionId) {
+  return request({
+    url: API_BASE_URL + "/collections/" + collectionId + "/images",
+    method: "GET",
+  });
+}
+export function getAllImages() {
+  return request({
+    url: API_BASE_URL + "/collections/images",
+  });
+}
+// multipart upload axios
 export function sessionStorageUser() {
   if (sessionStorage.getItem(ACCESS_TOKEN)) {
     return "Bearer " + sessionStorage.getItem(ACCESS_TOKEN);
   }
 }
-
 export function createCollection(formData) {
   return axios({
     method: "post",
     headers: {
       Authorization: sessionStorageUser(),
     },
-    url: "http://localhost:8080/api/collections",
+    url: API_BASE_URL + "/collections",
+    data: formData,
+  });
+}
+
+export function createImageInCollection(collectionId, formData) {
+  console.log("API UTILS > > ", collectionId);
+  return axios({
+    method: "post",
+    headers: {
+      Authorization: sessionStorageUser(),
+    },
+    url: API_BASE_URL + "/collections/" + collectionId + "/images",
     data: formData,
   });
 }

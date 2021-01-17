@@ -28,19 +28,7 @@ export class AllCollections extends Component {
         collections: response,
       });
     });
-    // console.log(this.props.collectionname);
-    // const {
-    //   match: { params },
-    // } = this.props;
-    // console.log(params.id);
-    // getUserCollectionByCollectionId(params.id).then((response) => {
-    //   console.log(response);
-    //   this.setState({
-    //     collections: response,
-    //   });
-    // });
   }
-  componentDidUpdate() {}
   render() {
     return (
       <div className="pinterest-layout-container">
