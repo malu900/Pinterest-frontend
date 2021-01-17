@@ -36,11 +36,9 @@ export class Collection extends Component {
       .catch(function (response) {
         console.log(response);
       });
-    console.log(formData);
   };
 
   fileSelectedHandler = (event) => {
-    console.log(event.target.files[0]);
     this.setState({
       file: event.target.files[0],
     });

@@ -23,7 +23,6 @@ export class Collections extends Component {
       this.props.history.push("/");
     }
     getAllCollectionsFromUser().then((response) => {
-      console.log(response, "TEST");
       this.setState({
         collections: response,
       });

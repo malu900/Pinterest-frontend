@@ -33,7 +33,6 @@ const request = (options) => {
 };
 
 export function signup(signupRequest) {
-  console.log(signupRequest);
   return request({
     url: API_BASE_URL + "/auth/signup",
     method: "POST",
@@ -42,7 +41,6 @@ export function signup(signupRequest) {
 }
 
 export function login(loginrequest) {
-  console.log(loginrequest);
   return request({
     url: API_BASE_URL + "/auth/signin",
     method: "POST",
@@ -90,6 +88,13 @@ export function getAllImagesFromUserInCollection(collectionId) {
 export function getAllImages() {
   return request({
     url: API_BASE_URL + "/collections/images",
+    method: "GET",
+  });
+}
+export function getImageById(id) {
+  return request({
+    url: API_BASE_URL + "/collections/images/" + id,
+    method: "GET",
   });
 }
 // multipart upload axios
@@ -110,7 +115,6 @@ export function createCollection(formData) {
 }
 
 export function createImageInCollection(collectionId, formData) {
-  console.log("API UTILS > > ", collectionId);
   return axios({
     method: "post",
     headers: {

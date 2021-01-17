@@ -36,7 +36,6 @@ export default class Signup extends Component {
       .then((response) => {
         toast.success(response);
         this.props.history.push("/login");
-        console.log("been here duhhh");
       })
       .catch((error) => {
         console.log(error);

@@ -7,7 +7,6 @@ import SockJsClient from "react-stomp";
 export class AllCollections extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props);
     this.props = props;
     this.state = {
       collections: [],
@@ -23,7 +22,6 @@ export class AllCollections extends Component {
       this.props.history.push("/");
     }
     getAllCollectionsFromUser().then((response) => {
-      console.log("here ", response);
       this.setState({
         collections: response,
       });

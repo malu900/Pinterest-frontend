@@ -21,9 +21,7 @@ export default class Login extends Component {
     });
   };
 
-  componentDidMount() {
-    console.log(this.props);
-  }
+  componentDidMount() {}
   handleSubmitLogin = (event) => {
     event.preventDefault();
     const values = {

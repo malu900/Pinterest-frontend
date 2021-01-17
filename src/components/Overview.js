@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { getAllImages } from "../common/APIUtils";
 import { ImageComponent } from "./ImageComponent";
+import { Link } from "react-router-dom";
+import { ImageWebsockets } from "./ImageWebsockets";
 
 export class Overview extends Component {
   constructor(props) {
@@ -14,7 +16,6 @@ export class Overview extends Component {
 
   componentDidMount() {
     let bool = this.state.isauthenticated;
-    console.log(bool);
     if (bool) {
       console.log("authed");
       this.getAllImagesIfSignedIn();
@@ -28,24 +29,33 @@ export class Overview extends Component {
       this.setState({
         images: response,
       });
-      console.log(response);
     });
   };
 
   render() {
     let images = this.state.images;
-    console.log(images);
     return (
-      <div className="pinterest-layout-container">
+      <div className="image-container">
         {images.length > 0 ? (
           images.map((item, i) => (
-            <ImageComponent
-              className="pinterest-layout-container-item"
-              image={item}
-              isauthenticated={this.state.isauthenticated}
-              currentuser={this.state.currentuser}
-              {...this.props}
-            />
+            <div>
+              <ImageComponent
+                key={i}
+                image={item}
+                isauthenticated={this.state.isauthenticated}
+                currentuser={this.state.currentuser}
+                {...this.props}
+              />
+              <Link
+                key={i}
+                to={`/collections/images/${item.id}`}
+                params={{ id: item.id }}
+                image={item}
+                {...this.props}
+              >
+                {item.imageName}
+              </Link>
+            </div>
           ))
         ) : (
           <div></div>
@@ -56,20 +66,20 @@ export class Overview extends Component {
 }
 
 export default Overview;
-// {this.state.images.length > 0 ? (
-//     this.state.images.map((item, i) => (
+// {images.length > 0 ? (
+//     images.map((item, i) => (
 //       <div>
 //         <img src={item.photoBase64} />
-//         {/* <Image
+//         <ImageComponent
 //           key={i}
 //           image={item}
 //           isauthenticated={this.state.isauthenticated}
 //           currentuser={this.state.currentuser}
-//         /> */}
+//         />
 //         {console.log(item)}
 //         <Link
 //           key={i}
-//           to={`/collections/images/${item.id}`}
+//         //   to={`/collections/images/${item.id}`}
 //           params={{ id: item.id }}
 //           image={item}
 //           {...this.props}
@@ -79,3 +89,4 @@ export default Overview;
 //       </div>
 //     ))
 //   )
+//     }

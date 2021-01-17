@@ -10,9 +10,7 @@ export class ImageComponent extends Component {
     };
   }
 
-  componentDidMount() {
-    console.log(this.state.currentuser);
-  }
+  componentDidMount() {}
   render() {
     return (
       <div className="image-container-layout">

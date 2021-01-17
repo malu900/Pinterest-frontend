@@ -35,7 +35,6 @@ export class ShowCollection extends Component {
     } = this.props;
     getUserCollectionByCollectionId(params.id).then((response) => {
       let collection = response;
-      console.log(response);
       this.setState({
         collection: collection,
         fileid: collection.collectionImage.id,
@@ -43,7 +42,6 @@ export class ShowCollection extends Component {
         user: collection.user,
         userId: collection.user.id,
       });
-      console.log(collection.user.id);
     });
     getAllImagesFromUserInCollection(params.id).then((response) => {
       let images = response;
@@ -52,7 +50,6 @@ export class ShowCollection extends Component {
       });
     });
   }
-  componentDidUpdate() {}
   render() {
     const {
       match: { params },
@@ -62,7 +59,7 @@ export class ShowCollection extends Component {
 
     return (
       <div>
-        <p style={{ margin: "0" }}>{collection.collectionname}</p>
+        <p>{collection.collectionname}</p>
         <CreateImage
           collectionId={params.id}
           isauthenticated={this.state.isauthenticated}

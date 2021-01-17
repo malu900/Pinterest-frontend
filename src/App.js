@@ -14,9 +14,7 @@ import Collections from "./components/Collections";
 import ShowCollection from "./components/ShowCollection";
 import AllCollections from "./components/AllCollections";
 import CreateImage from "./components/CreateImage";
-import Image from "./components/Image";
-import { Link } from "react-router-dom";
-import { ImageComponent } from "./components/ImageComponent";
+import { ImageWebsockets } from "./components/ImageWebsockets";
 import Overview from "./components/Overview";
 
 export class App extends Component {
@@ -30,7 +28,6 @@ export class App extends Component {
   }
   loadcurrentuser = () => {
     getcurrentuser().then((response) => {
-      console.log(response);
       this.setState({
         currentuser: response,
         isauthenticated: true,
@@ -41,7 +38,6 @@ export class App extends Component {
   componentDidMount() {
     this.loadcurrentuser();
     this.getAllImagesIfSignedIn();
-    console.log(this.currentuser, this.isauthenticated);
   }
 
   getAllImagesIfSignedIn() {
@@ -49,7 +45,6 @@ export class App extends Component {
       this.setState({
         images: response,
       });
-      console.log(response);
     });
   }
 
@@ -129,10 +124,9 @@ export class App extends Component {
                 )}
               />
               <Route
-                exact
                 path="/collections/images/:id"
                 render={(props) => (
-                  <ImageComponent
+                  <ImageWebsockets
                     {...props}
                     isauthenticated={this.state.isauthenticated}
                     currentuser={this.state.currentuser}

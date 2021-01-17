@@ -20,16 +20,9 @@ export class AppHeader extends Component {
         <Container key="loggedincontainer">
           <Navbar.Brand key="/">
             <Link to="/"> HOME </Link>
-          </Navbar.Brand>
-          <Nav.Item key="overview">
             <Link to={"/images"}>overview</Link>
-          </Nav.Item>
-          <Nav.Item key="all collection">
-            <Link to={"/collections/"}>Create Collection</Link>
-          </Nav.Item>
-          <Nav.Item key="new collection">
-            <Link to={"/collections/all"}>all collections</Link>
-          </Nav.Item>
+          </Navbar.Brand>
+
           <div className="username-info">
             signed in as: {this.props.currentuser.username}
           </div>
@@ -39,7 +32,12 @@ export class AppHeader extends Component {
                 Profile
               </Link>
             </Nav.Item>
-
+            <Nav.Item key="My collections">
+              <Link to={"/collections/all"}>My collections</Link>
+            </Nav.Item>
+            <Nav.Item key="Create collection">
+              <Link to={"/collections/"}>Create Collection</Link>
+            </Nav.Item>
             <NavDropdown.Divider />
             <NavDropdown.Item onClick={() => this.handleMenuClick()}>
               logout

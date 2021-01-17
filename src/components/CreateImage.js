@@ -30,7 +30,6 @@ export class CreateImage extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    console.log(this.props.collectionId);
 
     const formData = new FormData();
     formData.append("file", this.state.file);
@@ -42,15 +41,13 @@ export class CreateImage extends Component {
           imageName: "",
           file: null,
         });
+        const id = this.props.collectionId;
+        window.location.reload();
       })
-      .catch(function (response) {
-        console.log(response);
-      });
-    console.log(formData);
+      .catch(function (response) {});
   };
 
   fileSelectedHandler = (event) => {
-    console.log(event.target.files[0]);
     this.setState({
       file: event.target.files[0],
     });
